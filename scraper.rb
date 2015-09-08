@@ -30,7 +30,9 @@ def party_info_for(img)
   return ['Partido del Trabajo', 'PT'] if img == 'images/logpt.jpg'
   return ['Partido Nueva Alianza', 'PANAL'] if img == 'images/panal.gif'
   return ['Movimiento Regeneración Nacional', 'MORENA'] if img == 'images/LogoMorena.jpg'
+  return ['Encuentro Social', 'PES'] if img == 'images/encuentro.png'
   return ['Sin Partido', '_IND'] if img == 'images/logo_SP.jpg'
+  return ['Sin Partido', '_IND'] if img == 'images/independiente.png'
   raise "Unknown party: #{img}"
 end
 
@@ -75,7 +77,7 @@ def scrape_list(url)
       party_id: party_id,
       area_id: area_id,
       area: area,
-      term: '62',
+      term: '63',
     }.merge(scrape_person mp_url)
     ScraperWiki.save_sqlite([:id, :term], data)
     puts i if (i % 50).zero?
