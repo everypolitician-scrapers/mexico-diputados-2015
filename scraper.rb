@@ -60,7 +60,9 @@ def scrape_list(url)
       if img = tr.css('img/@src').text
         next if img.to_s.empty? 
         next if img == 'images/h_line.gif'
+        next if img == 'images/lin_por_gp.jpg'
         party, party_id = party_info_for(img)
+        warn party.to_s
       end
       next
     end
