@@ -91,10 +91,9 @@ def scrape_person(url)
   data = { 
     name:noko.css('td strong').find { |n| n.text.include? 'Dip. ' }.text.sub('Dip. ','').sub(' (LICENCIA)', '').tidy,
     image: noko.at_css('img[src*="fotos"]/@src').text, 
-    email: noko.xpath('//td[span[contains(.,"Correo")]]/a/@href').text.gsub(/mailto:\s*/,''),
+    email: noko.xpath('//td[contains(.,"Correo")]').last.xpath('following-sibling::td').text,
     source: url.to_s,
   }
-  binding.pry
   data[:image] = URI.join(url, URI.escape(data[:image])).to_s unless data[:image].to_s.empty?
   return data
 end
