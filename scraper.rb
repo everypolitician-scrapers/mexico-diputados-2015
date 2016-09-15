@@ -89,9 +89,9 @@ end
 
 def scrape_person(url)
   noko = noko_for(url)
-  data = { 
-    name:noko.css('td strong').find { |n| n.text.include? 'Dip. ' }.text.sub('Dip. ','').sub(' (LICENCIA)', '').tidy,
-    image: noko.at_css('img[src*="fotos"]/@src').text, 
+  data = {
+    name:noko.css('td strong').find { |n| n.text.include? 'Dip. ' }.text.sub('Dip. ','').sub(' (LICENCIA)', '').sub(' (no rindieron protesta)', '').sub(' (pendiente protesta)', '').tidy,
+    image: noko.at_css('img[src*="fotos"]/@src').text,
     email: noko.xpath('//td[contains(.,"Correo")]').last.xpath('following-sibling::td').text,
     source: url.to_s,
   }
@@ -99,4 +99,59 @@ def scrape_person(url)
   return data
 end
 
+def scrape_ceased(url)
+  noko = noko_for(url)
+
+  img      = noko.css('td div p img/@src').text
+  party, party_id = party_info_for(img)
+  entidad  = noko.css('strong font')[1].text.tidy
+  distrito = noko.css('strong font')[2].text.tidy
+  area     = "#{entidad} #{distrito}"
+  area_id  = "ocd-division/country:mx/entidad:#{entidad}/distrito:#{distrito}"
+
+  data = {
+    id:        url.to_s[/dipt=(\d+)/, 1],
+    sort_name: '',
+    party:     party,
+    party_id:  party_id,
+    area_id:   area_id,
+    area:      area,
+    term:      '63',
+  }.merge(scrape_person url)
+  ScraperWiki.save_sqlite([:id, :term], data)
+end
+
 scrape_list('http://sitl.diputados.gob.mx/LXIII_leg/listado_diputados_gpnp.php?tipot=TOTAL')
+
+ceased = [
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=149',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=231',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=246',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=263',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=273',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=309',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=319',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=336',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=376',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=377',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=381',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=404',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=414',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=449',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=456',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=486',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=494',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=531',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=533',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=702',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=730',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=770',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=780',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=858',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=867',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=873',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=880',
+  'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=882'
+]
+ceased.each { |url| scrape_ceased(url)}
+
