@@ -18,7 +18,7 @@ response:
     message: OK
   headers:
     Date:
-    - Sat, 24 Sep 2016 18:43:37 GMT
+    - Sun, 25 Sep 2016 11:58:46 GMT
     Server:
     - Apache/2.2.3 (Unix) mod_ssl/2.2.3 OpenSSL/0.9.8d Zend Core/2.0.1 PHP/5.2.1
     X-Powered-By:
@@ -30,4 +30,4 @@ response:
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Sat, 24 Sep 2016 18:45:13 GMT
+recorded_at: Sun, 25 Sep 2016 12:00:27 GMT
