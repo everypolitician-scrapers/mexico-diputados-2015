@@ -81,22 +81,10 @@ def scrape_list(url)
       area_id:   area_id,
       area:      area,
       term:      '63',
-    }.merge(scrape_person(mp_url))
+    }.merge((scrape mp_url => MemberPage).to_h)
     ScraperWiki.save_sqlite(%i(id term), data)
     puts i if (i % 50).zero?
   end
-end
-
-def scrape_person(url)
-  noko = noko_for(url)
-  data = {
-    name:   noko.css('td strong').find { |n| n.text.include? 'Dip. ' }.text.sub('Dip. ', '').sub(' (LICENCIA)', '').tidy,
-    image:  noko.at_css('img[src*="fotos"]/@src').text,
-    email:  noko.xpath('//td[contains(.,"Correo")]').last.xpath('following-sibling::td').text,
-    source: url.to_s,
-  }
-  data[:image] = URI.join(url, URI.escape(data[:image])).to_s unless data[:image].to_s.empty?
-  data
 end
 
 ScraperWiki.sqliteexecute('DELETE FROM data') rescue nil
