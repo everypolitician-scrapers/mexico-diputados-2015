@@ -3,12 +3,15 @@
 # frozen_string_literal: true
 
 require 'pry'
+require 'require_all'
 require 'scraped'
 require 'scraperwiki'
 
 # require 'open-uri/cached'
 # OpenURI::Cache.cache_path = '.cache'
 require 'scraped_page_archive/open-uri'
+
+require_rel 'lib'
 
 def noko_for(url)
   Nokogiri::HTML(open(url).read)
