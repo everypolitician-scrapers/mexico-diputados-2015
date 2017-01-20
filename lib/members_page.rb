@@ -24,12 +24,12 @@ class MembersPage < Scraped::HTML
     end
 
     field :members do
-      noko.xpath('following-sibling::tr').slice_before { |i| i.text == noko.text }
+      noko.xpath('following-sibling::tr')
+          .reject { |row| row.at_xpath('./td/@colspan').to_s >= '3' }
+          .slice_before { |i| i.text == noko.text }
           .first.map do |row|
-        span = row.at_xpath('./td/@colspan')
-        next if span.to_s == '3'
         fragment row => MemberRow
-      end.reject(&:nil?)
+      end
     end
 
     private
