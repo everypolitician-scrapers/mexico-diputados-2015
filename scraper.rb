@@ -13,6 +13,11 @@ require 'scraped_page_archive/open-uri'
 
 require_rel 'lib'
 
+def scrape(h)
+  url, klass = h.to_a.first
+  klass.new(response: Scraped::Request.new(url: url).response)
+end
+
 def noko_for(url)
   Nokogiri::HTML(open(url).read)
 end
