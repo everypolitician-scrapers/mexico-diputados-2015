@@ -8,10 +8,8 @@ class MembersPage < Scraped::HTML
   decorator PartyNameAttributes
 
   field :party_groupings do
-    trs = noko.xpath('//td[contains(.,"Distrito / Circunscripción")]/table/tr')
-    rows = trs.xpath('td[contains(.,"Circunscripción")]/parent::tr')
-
-    rows.map do |row|
+    noko.xpath('//td/table/tr/td[contains(.,"Circunscripción")]/parent::tr')
+        .map do |row|
       fragment row => PartyGroupings
     end
   end
