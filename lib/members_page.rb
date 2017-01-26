@@ -55,7 +55,7 @@ class MembersPage < Scraped::HTML
     end
 
     field :area do
-      noko.xpath('td')[1].text rescue binding.pry
+      noko.xpath('td')[1].text
     end
 
     field :area_id do
