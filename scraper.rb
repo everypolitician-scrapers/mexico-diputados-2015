@@ -22,14 +22,18 @@ def noko_for(url)
   Nokogiri::HTML(open(url).read)
 end
 
-def scrape_list(url)
-  data = (scrape url => MembersPage).member_rows
-                                    .map do |row|
-                                      row.merge((scrape row[:source] => MemberPage).to_h)
-                                         .merge(term: '63')
-                                    end
-  ScraperWiki.save_sqlite(%i(id term), data)
+def scrape_list(term, url)
+  (scrape url => MembersPage).party_groupings.each do |party|
+    party.members.map do |mem|
+      data = {
+        party:    party.name,
+        party_id: party.id,
+        term:     term,
+      }.merge(mem.to_h).merge((scrape mem.source => MemberPage).to_h)
+      ScraperWiki.save_sqlite(%i(id term), data)
+    end
+  end
 end
 
 ScraperWiki.sqliteexecute('DELETE FROM data') rescue nil
-scrape_list('http://sitl.diputados.gob.mx/LXIII_leg/listado_diputados_gpnp.php?tipot=TOTAL')
+scrape_list(16, 'http://sitl.diputados.gob.mx/LXIII_leg/listado_diputados_gpnp.php?tipot=TOTAL')
