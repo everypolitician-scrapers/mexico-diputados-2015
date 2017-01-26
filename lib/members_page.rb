@@ -59,7 +59,6 @@ class MembersPage < Scraped::HTML
     end
 
     field :area_id do
-      # TODO: Handle this in a decorator
       d_c_no = noko.xpath('td')[2]
                    .text
                    .downcase
