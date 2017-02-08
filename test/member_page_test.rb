@@ -7,18 +7,14 @@ describe MemberPage do
 
   subject do
     url = 'http://sitl.diputados.gob.mx/LXIII_leg/curricula.php?dipt=388'
-    MemberPage.new(response: Scraped::Request.new(url: url).response).to_h
+    MemberPage.new(response: Scraped::Request.new(url: url).response)
   end
 
-  it 'should have the correct :name' do
-    subject[:name].must_equal 'Patricia Sánchez Carrillo'
-  end
-
-  it 'should have the correct :image' do
-    subject[:image].must_equal 'http://sitl.diputados.gob.mx/LXIII_leg/fotos_lxiiiconfondo/457_FOTO_CHICA.jpg'
-  end
-
-  it 'should have the correct :email' do
-    subject[:email].must_equal 'psanchez.carrillo@congreso.gob.mx '
+  it 'should have the expected data' do
+    subject.to_h.must_equal(
+      name:  'Patricia Sánchez Carrillo',
+      image: 'http://sitl.diputados.gob.mx/LXIII_leg/fotos_lxiiiconfondo/457_FOTO_CHICA.jpg',
+      email: 'psanchez.carrillo@congreso.gob.mx '
+    )
   end
 end
