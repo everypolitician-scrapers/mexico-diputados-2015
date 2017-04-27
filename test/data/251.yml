@@ -4,4 +4,5 @@
 :to_h:
   :name: Héctor Ulises Cristopulos Ríos
   :image: http://sitl.diputados.gob.mx/LXIII_leg/fotos_lxiiiconfondo/088_FOTO_CHICA.jpg
+  # TODO: The trailing space should be removed (issue: #7)
   :email: 'hector.cristopulos@congreso.gob.mx '
