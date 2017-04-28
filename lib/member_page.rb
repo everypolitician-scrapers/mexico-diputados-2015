@@ -24,5 +24,6 @@ class MemberPage < Scraped::HTML
         .last
         .xpath('following-sibling::td')
         .text
+        .tidy
   end
 end
