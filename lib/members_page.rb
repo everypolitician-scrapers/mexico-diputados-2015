@@ -1,5 +1,6 @@
 # encoding: utf-8
 # frozen_string_literal: true
+
 require 'scraped'
 require_relative './decorators/party_name_attributes'
 

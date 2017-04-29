@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'scraped'
 
 # Members on the members page are grouped by party but the names or ids of the

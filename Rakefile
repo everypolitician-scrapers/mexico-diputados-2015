@@ -13,4 +13,4 @@ end
 ScraperTest::RakeTask.new.install_tasks
 
 task test: 'test:data'
-task default: %w(rubocop test)
+task default: %w[rubocop test]
