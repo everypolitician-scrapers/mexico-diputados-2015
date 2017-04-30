@@ -5,7 +5,7 @@ require 'scraped'
 require_relative './decorators/party_name_attributes'
 
 class MembersPage < Scraped::HTML
-  decorator Scraped::Response::Decorator::AbsoluteUrls
+  decorator Scraped::Response::Decorator::CleanUrls
   decorator PartyNameAttributes
 
   field :party_groupings do
