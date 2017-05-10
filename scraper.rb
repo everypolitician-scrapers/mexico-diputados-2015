@@ -27,6 +27,8 @@ def data_for_members(term, url)
   end
 end
 
-ScraperWiki.sqliteexecute('DROP TABLE data') rescue nil
 data = data_for_members('63', 'http://sitl.diputados.gob.mx/LXIII_leg/listado_diputados_gpnp.php?tipot=TOTAL')
+data.each { |mem| puts mem.reject { |_, v| v.to_s.empty? }.sort_by { |k, _| k }.to_h } if ENV['MORPH_DEBUG']
+
+ScraperWiki.sqliteexecute('DROP TABLE data') rescue nil
 ScraperWiki.save_sqlite(%i[id term], data)
