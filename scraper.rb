@@ -27,6 +27,6 @@ def data_for_members(term, url)
   end
 end
 
-ScraperWiki.sqliteexecute('DELETE FROM data') rescue nil
+ScraperWiki.sqliteexecute('DROP TABLE data') rescue nil
 data = data_for_members('63', 'http://sitl.diputados.gob.mx/LXIII_leg/listado_diputados_gpnp.php?tipot=TOTAL')
 ScraperWiki.save_sqlite(%i[id term], data)
