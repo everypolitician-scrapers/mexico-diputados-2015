@@ -18,16 +18,16 @@ response:
     message: OK
   headers:
     Date:
-    - Wed, 01 Nov 2017 15:36:29 GMT
+    - Thu, 02 Nov 2017 15:12:33 GMT
     Server:
     - Apache/2.2.3 (Unix) mod_ssl/2.2.3 OpenSSL/0.9.8d Zend Core/2.0.1 PHP/5.2.1
     X-Powered-By:
     - Zend Core/2.0.1 PHP/5.2.1
     Content-Length:
-    - '6782'
+    - '5573'
     Content-Type:
     - text/html
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Wed, 01 Nov 2017 15:35:56 GMT
+recorded_at: Thu, 02 Nov 2017 15:12:07 GMT
