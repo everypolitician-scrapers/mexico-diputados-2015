@@ -18,7 +18,7 @@ response:
     message: OK
   headers:
     Date:
-    - Thu, 23 Aug 2018 09:01:50 GMT
+    - Thu, 23 Aug 2018 16:46:34 GMT
     Server:
     - Apache/2.2.3 (Unix) mod_ssl/2.2.3 OpenSSL/0.9.8d Zend Core/2.0.1 PHP/5.2.1
     X-Powered-By:
@@ -26,10 +26,10 @@ response:
     Content-Type:
     - text/html
     Set-Cookie:
-    - cookiesession1=1FC30E47VMF0VVYDSR21QST4RPK0BF2C;Path=/;HttpOnly
+    - cookiesession1=1FC30E475IHHLKYGGTYC3D2QLJDK0464;Path=/;HttpOnly
     Content-Length:
     - '10304'
   body:
     encoding: ASCII-8BIT
   http_version: 
-recorded_at: Thu, 23 Aug 2018 09:32:53 GMT
+recorded_at: Thu, 23 Aug 2018 17:17:39 GMT
