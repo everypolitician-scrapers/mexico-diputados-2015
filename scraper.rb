@@ -7,7 +7,6 @@ require 'scraperwiki'
 
 require 'open-uri/cached'
 OpenURI::Cache.cache_path = '.cache'
-require 'scraped_page_archive/open-uri'
 
 require_rel 'lib'
 
